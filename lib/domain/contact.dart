@@ -1,10 +1,10 @@
 class Contact {
-  static final String contactTable = "contactTable";
-  static final String idColumn = "idColumn";
-  static final String nameColumn = "nameColumn";
-  static final String phoneColumn = "phoneColumn";
-  static final String emailColumn = "emailColumn";
-  static final String imgColumn = "imgColumn";
+  static const String contactTable = "contactTable";
+  static const String idColumn = "idColumn";
+  static const String nameColumn = "nameColumn";
+  static const String phoneColumn = "phoneColumn";
+  static const String emailColumn = "emailColumn";
+  static const String imgColumn = "imgColumn";
 
   int id = 0;
   String name = '';
@@ -36,6 +36,6 @@ class Contact {
 
   @override
   String toString() {
-    return "Contact(id: ${id}, name: ${name}, email: ${email}, phone: ${phone}, img: ${img})";
+    return "Contact(id: $id, name: $name, email: $email, phone: $phone, img: $img)";
   }
 }

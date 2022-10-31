@@ -38,8 +38,9 @@ class ContactHelper {
 
   Future<Contact> saveContact(Contact c) async {
     Database? dbContact = await db;
-    if (dbContact != null)
+    if (dbContact != null) {
       c.id = await dbContact.insert(Contact.contactTable, c.toMap());
+    }
     return c;
   }
 
@@ -56,10 +57,11 @@ class ContactHelper {
           ],
           where: "${Contact.idColumn} = ?",
           whereArgs: [id]);
-      if (maps.length > 0)
+      if (maps.isNotEmpty) {
         return Contact.fromMap(maps.first);
-      else
+      } else {
         return null;
+      }
     }
     return null;
   }
@@ -69,8 +71,9 @@ class ContactHelper {
     if (dbContact != null) {
       return await dbContact.delete(Contact.contactTable,
           where: "${Contact.idColumn} = ?", whereArgs: [id]);
-    } else
+    } else {
       return 0;
+    }
   }
 
   Future<int> updateContact(Contact c) async {

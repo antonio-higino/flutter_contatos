@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Contatos"),
+          title: const Text("Contatos"),
           backgroundColor: Colors.lightBlue,
           centerTitle: true),
       backgroundColor: Colors.white,
@@ -45,11 +45,11 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           _showContactPage();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.lightBlue,
       ),
       body: ListView.builder(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           itemCount: contatos.length,
           itemBuilder: (context, index) {
             return _contatoCard(context, index);
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
         child: Card(
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               children: <Widget>[
                 Container(
@@ -73,27 +73,27 @@ class _HomePageState extends State<HomePage> {
                       image: DecorationImage(
                           image: contatos[index].img != ''
                               ? FileImage(File(contatos[index].img))
-                              : AssetImage("images/person.png")
+                              : const AssetImage("images/person.png")
                                   as ImageProvider)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //se não existe nome, joga vazio
                       Text(
                         contatos[index].name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 22.0, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         contatos[index].email,
-                        style: TextStyle(fontSize: 18.0),
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                       Text(
                         contatos[index].phone,
-                        style: TextStyle(fontSize: 18.0),
+                        style: const TextStyle(fontSize: 18.0),
                       ),
                     ],
                   ),
@@ -117,15 +117,15 @@ class _HomePageState extends State<HomePage> {
             onClosing: () {},
             builder: (context) {
               return Container(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   //ocupa o mínimo de espaço.
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: TextButton(
-                            child: Text("ligar",
+                            child: const Text("ligar",
                                 style: TextStyle(
                                     color: Colors.lightBlue, fontSize: 20.0)),
                             onPressed: () {
@@ -133,9 +133,9 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                             })),
                     Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: TextButton(
-                            child: Text("editar",
+                            child: const Text("editar",
                                 style: TextStyle(
                                     color: Colors.lightBlue, fontSize: 20.0)),
                             onPressed: () {
@@ -143,9 +143,9 @@ class _HomePageState extends State<HomePage> {
                               _showContactPage(contact: contatos[index]);
                             })),
                     Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: TextButton(
-                            child: Text("excluir",
+                            child: const Text("excluir",
                                 style: TextStyle(
                                     color: Colors.lightBlue, fontSize: 20.0)),
                             onPressed: () {
@@ -166,10 +166,11 @@ class _HomePageState extends State<HomePage> {
     Contact contatoRet = await Navigator.push(context,
         MaterialPageRoute(builder: (context) => ContactPage(contact: contact)));
 
-    if (contatoRet.id == 0)
+    if (contatoRet.id == 0) {
       await helper.saveContact(contatoRet);
-    else
+    } else {
       await helper.updateContact(contatoRet);
+    }
 
     updateList();
   }

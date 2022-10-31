@@ -33,9 +33,9 @@ class _ContactPageState extends State<ContactPage> {
 
     //acessando o contato definido no widget(ContactPage)
     //mostrar se ela for privada
-    if (widget.contact == null)
+    if (widget.contact == null) {
       _editedContact = Contact();
-    else {
+    } else {
       _editedContact = widget.contact;
 
       nomeController.text = _editedContact!.name;
@@ -50,16 +50,16 @@ class _ContactPageState extends State<ContactPage> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text("Abandonar alteração?"),
-              content: Text("Os dados serão perdidos."),
+              title: const Text("Abandonar alteração?"),
+              content: const Text("Os dados serão perdidos."),
               actions: <Widget>[
                 TextButton(
-                    child: Text("cancelar"),
+                    child: const Text("cancelar"),
                     onPressed: () {
                       Navigator.pop(context);
                     }),
                 TextButton(
-                  child: Text("sim"),
+                  child: const Text("sim"),
                   onPressed: () {
                     //desempilha 2x
                     Navigator.pop(context);
@@ -87,16 +87,17 @@ class _ContactPageState extends State<ContactPage> {
             centerTitle: true),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            if (_editedContact!.name.isNotEmpty)
+            if (_editedContact!.name.isNotEmpty) {
               Navigator.pop(context, _editedContact);
-            else
+            } else {
               FocusScope.of(context).requestFocus(_nomeFocus);
+            }
           },
-          child: Icon(Icons.save),
+          child: const Icon(Icons.save),
           backgroundColor: Colors.lightBlue,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
               GestureDetector(
@@ -108,15 +109,15 @@ class _ContactPageState extends State<ContactPage> {
                         image: DecorationImage(
                             image: _editedContact!.img != ''
                                 ? FileImage(File(_editedContact!.img))
-                                : AssetImage('images/person.png')
+                                : const AssetImage('images/person.png')
                                     as ImageProvider))),
                 onTap: () {
                   ImagePicker()
                       .getImage(source: ImageSource.camera, imageQuality: 50)
                       .then((file) {
-                    if (file == null)
+                    if (file == null) {
                       return;
-                    else {
+                    } else {
                       setState(() {
                         _editedContact!.img = file.path;
                       });
@@ -127,7 +128,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 controller: nomeController,
                 focusNode: _nomeFocus,
-                decoration: InputDecoration(labelText: "Nome"),
+                decoration: const InputDecoration(labelText: "Nome"),
                 onChanged: (text) {
                   _userEdited = true;
                   setState(() {
@@ -138,7 +139,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(labelText: "E-mail"),
+                decoration: const InputDecoration(labelText: "E-mail"),
                 onChanged: (text) {
                   _userEdited = true;
                   _editedContact!.email = text;
@@ -147,7 +148,7 @@ class _ContactPageState extends State<ContactPage> {
               TextField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(labelText: "Telefone"),
+                decoration: const InputDecoration(labelText: "Telefone"),
                 onChanged: (text) {
                   _userEdited = true;
                   _editedContact!.phone = text;
